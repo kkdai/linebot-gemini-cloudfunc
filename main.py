@@ -47,9 +47,13 @@ def linebot(request):
                 fdb.delete(user_chat_path, None)
             else:
                 model = genai.GenerativeModel('gemini-pro')
-                response = model.generate_content(msg)
+                messages.append({'role':'user','parts': [msg]})                
+                response = model.generate_content(messages)
+                messages.append({'role':'model','parts': [response.text]})                
                 reply_msg = TextSendMessage(text=response.text)
-
+                # 更新firebase中的對話紀錄
+                fdb.put_async(user_chat_path, None , messages)
+                
             line_bot_api.reply_message(tk, reply_msg)
 
         else:
