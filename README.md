@@ -1,17 +1,17 @@
-# Gemini Pro
+# Gemini Pro LINE Bot on Cloud Function with Firebase Database
 
-This project demonstrates how to create a LineBot with memory capabilities, allowing for continuous and context-aware conversations. The bot leverages several platforms for its development and deployment.
+This project demonstrates how to create a LINEBot with memory capabilities, allowing for continuous and context-aware conversations. The bot leverages several platforms for its development and deployment.
 
 ## Platforms Used
 
-- **Line Developers**: To create and configure the LineBot.
+- **LINE Developers**: To create and configure the LINEBot.
 - **Gemini Pro**: To enable conversational AI capabilities.
-- **Google Cloud Functions**: To deploy the Python code and generate a webhook for the LineBot.
+- **Google Cloud Functions**: To deploy the Python code and generate a webhook for the LINEBot.
 - **Firebase**: To establish a real-time database for storing conversation history.
 
-## LineBot Creation
+## LINEBot Creation
 
-### Step 1: Create a Bot on Line Developers
+### Step 1: Create a Bot on LINE Developers
 
 ### Step 2: Configure Bot Basic Information
 
@@ -76,16 +76,16 @@ Set the environment to the first generation and the region to `asia-east1` (Taiw
 Add four runtime environment variables:
 
 - `GEMINI_API_KEY`: Your Gemini Pro secret key.
-- `LINE_BOT_TOKEN`: Your Line Developers Channel access token.
-- `LINE_BOT_SECRET`: Your Line Developers Channel secret.
+- `LINE_BOT_TOKEN`: Your LINE Developers Channel access token.
+- `LINE_BOT_SECRET`: Your LINE Developers Channel secret.
 - `FIREBASE_URL`: Your Firebase URL.
 
 ### Step 4: Deploy
 
-After setting up the function, deploy it. Once deployed, you'll find a 'Trigger URL' that you'll paste back into your LineBot.
+After setting up the function, deploy it. Once deployed, you'll find a 'Trigger URL' that you'll paste back into your LINEBot.
 
 ## Result
 
 You can check the conversation history stored in Firebase.
 
-With this setup, you have successfully created a LineBot with memory capabilities, allowing for more engaging and contextually aware conversations.
+With this setup, you have successfully created a LINEBot with memory capabilities, allowing for more engaging and contextually aware conversations.
