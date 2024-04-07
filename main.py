@@ -4,7 +4,8 @@ import json
 import os
 from firebase import firebase
 import google.generativeai as genai
-
+from PIL import Image
+import io
 
 # 使用環境變量讀取憑證
 token = os.getenv('LINE_BOT_TOKEN')
@@ -57,10 +58,14 @@ def linebot(request):
             line_bot_api.reply_message(tk, reply_msg)
 
         elif msg_type == 'image':
-            # 获取图片内容
+            print("Get image msg")
+            # 獲取圖片內容
             message_id = event['message']['id']
             message_content = line_bot_api.get_message_content(message_id)
             image_content = message_content.content
+
+            # Convert byte stream to PIL Image
+            image = Image.open(io.BytesIO(image_content))
 
             # 生成圖片敘述
             prompt = 'Please describe the image below:'
