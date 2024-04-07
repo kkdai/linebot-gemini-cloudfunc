@@ -56,8 +56,26 @@ def linebot(request):
                 
             line_bot_api.reply_message(tk, reply_msg)
 
+        elif msg_type == 'image':
+            # 获取图片内容
+            message_id = event['message']['id']
+            message_content = line_bot_api.get_message_content(message_id)
+            image_content = message_content.content
+
+            # 生成圖片敘述
+            prompt = 'Please describe the image below:'
+            model = genai.GenerativeModel('gemini-pro-vision')
+            response = model.generate_content([prompt, image_content], stream=True)
+            response.resolve()
+
+            # 將圖片敘述作為回覆
+            reply_msg = TextSendMessage(text=response.text)
+
+            # 發送回覆訊息
+            line_bot_api.reply_message(tk, reply_msg)
+
         else:
-            reply_msg = TextSendMessage(text='你傳的不是文字訊息呦')
+            reply_msg = TextSendMessage(text='你發送的不是文字或圖片訊息喔！')
             line_bot_api.reply_message(tk, reply_msg)
 
     except Exception as e:
