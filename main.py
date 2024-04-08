@@ -62,15 +62,17 @@ def linebot(request):
             # 獲取圖片內容
             message_id = event['message']['id']
             message_content = line_bot_api.get_message_content(message_id)
-            image_content = message_content.content
 
-            # Convert byte stream to PIL Image
-            image = Image.open(io.BytesIO(image_content))
+            with open(f'{message_id}.jpg', 'wb') as fd:
+                fd.write(message_content.content)    
+
+            # Open the image and convert to PIL format
+            img = Image.open(f'{message_id}.jpg')
 
             # 生成圖片敘述
             prompt = 'Please describe the image below:'
             model = genai.GenerativeModel('gemini-pro-vision')
-            response = model.generate_content([prompt, image_content], stream=True)
+            response = model.generate_content([prompt, img], stream=True)
             response.resolve()
 
             # 將圖片敘述作為回覆
